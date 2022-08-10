@@ -50,3 +50,25 @@ function get_string_between($string, $start, $end)
 function get_profile_field_data2(){
     return '';
 }
+
+/**
+ * @see https://stackoverflow.com/questions/19099922/array-shift-but-preserve-keys
+ */
+// returns value
+function array_shift_assoc( &$arr ){
+$val = reset( $arr );
+unset( $arr[ key( $arr ) ] );
+return $val; 
+}
+
+/**
+ * @see https://stackoverflow.com/questions/19099922/array-shift-but-preserve-keys
+ */
+// returns [ key, value ]
+function array_shift_assoc_kv( &$arr ){
+$val = reset( $arr );
+$key = key( $arr );
+$ret = array( $key => $val );
+unset( $arr[ $key ] );
+return $ret; 
+}

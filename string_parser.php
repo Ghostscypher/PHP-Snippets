@@ -69,21 +69,42 @@ this is a direct replacement: {!direct}
 ";
 
 $template1 = "
-this is an example of a for loop
-
-{!for:}
-{!for:}
-    justin
-{/for}
-{/for}
-
+This is an example of a for loop
 ";
 
 dump(
-    $template, 
+    $template1, 
     "---------------------------------",
-    EmailTemplateStringParser::parseTemplate($template, [
+    EmailTemplateStringParser::parseTemplate($template1, [
         'companyuser' => $example_user,
         'direct' => 91128,
+        'arrays' => [
+            $example_user,
+            $example_user2
+        ]
     ])
 );
+
+// $loader = new \Twig\Loader\ArrayLoader([
+//     'index' => '
+//     Hello {{ ExampleFunction("hi", name) }}
+//     {% for array in arrays %}
+//     {{ array.inner_value.temp }}
+//     {% endfor %}
+//     ',
+// ]);
+
+// $twig = new \Twig\Environment($loader);
+// $twig->addFunction(
+//     new \Twig\TwigFunction('ExampleFunction', function ($string, $name) {
+//         return $string . " " . $name;
+//     })
+// );
+
+// echo $twig->render('index', ['name' => 'Fabien', 'arrays' => [
+//             $example_user,
+//             $example_user2
+//         ] 
+//     ]);
+
+// echo $twig->render('index', ['name' => 'Fabien the second']);
